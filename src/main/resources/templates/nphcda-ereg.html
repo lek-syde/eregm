@@ -1,0 +1,1158 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>NPHCDA - COVID-19</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+
+
+    <meta property="og:title" content="NPHCDA COVID-19 Website">
+    <meta property="og:site_name" content="Vaccination registration">
+    <meta property="og:url" content="https://verification.vaccination.gov.ng/">
+    <meta property="og:description" content="Nigeria's Official vaccination website">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://res.cloudinary.com/moversng/image/upload/v1626449761/locall_l4dvut.png">
+    <meta property="twitter:image" content="https://res.cloudinary.com/moversng/image/upload/v1626449761/locall_l4dvut.png"  />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+
+    <!-- Begin loading animation -->
+    <link th:href="@{/assets/css/loaders/loader-pulse.css}" rel="stylesheet" type="text/css" media="all" />
+    <!-- End loading animation -->
+    <link th:href="@{/assets/css/theme.css}" rel="stylesheet" type="text/css" media="all" />
+    <link th:href="@{/assets/css/custom.css}" rel="stylesheet" type="text/css" media="all" />
+
+</head>
+
+<body style="background-color: #1b5636">
+
+
+<section class="row no-gutters p-0 min-vh-100">
+
+    <div class="col-lg-12">
+        <section class="p-0  text-white">
+            <div class="container min-vh-lg-100 d-flex flex-column justify-content-between text-center py-4 py-md-5">
+
+                <div class="row justify-content-center">
+                    <div class="col-xl-10 col-lg-10">
+
+                        <div class="card card-body shadow text-left text-dark">
+
+
+                                <div class="row">
+
+                                    <div class="col-4">
+                                        <a href="/" class="text-center  fade-page mb-3">
+
+                                        <img th:src="@{/images/ED.svg}" width="120px" alt="nigeria logo">
+                                        </a>
+                                    </div>
+
+                                    <div class="col-8" >
+                                        <div class="dropdown" style="text-align: -webkit-right !important;text-align: -moz-right !important; text-align: -o-right !important; text-align: -ms-right !important; ">
+                                            <button th:text="#{language.changelanguage}" aria-expanded="false" aria-haspopup="true" class="btn btn-sm btn-primary dropdown-toggle arrow-bottom" data-toggle="dropdown" type="button">
+
+                                            </button>
+                                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px); width: 9rem;">
+                                                <a class="dropdown-item" href="/?lang=en" >English</a>
+                                                <a class="dropdown-item" href="/?lang=yr" >Yoruba</a>
+                                                <a class="dropdown-item" href="/?lang=igbo" >Igbo </a>
+                                                <a class="dropdown-item" href="?lang=hau" >Hausa </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            <br/>
+
+
+
+
+                                <div class="tab-content flex-grow-1 mt-3 mt-md-4" id="myTabContent-4">
+                                    <div class="tab-pane fade active show" id="home-4" role="tabpanel" aria-labelledby="home-tab-4">
+
+                                            <div class="card-body">
+                                                <form data-form-email novalidate   th:action="@{/registration}" th:object="${userprofile}" data-success-redirect="/confirmation" method="post"  >
+
+
+
+
+                                                    <h2 th:text="#{welcome.message}"></h2>
+
+
+                                                    <div class="form-row">
+
+
+
+
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.lastname}"></label>
+                                                                <input type="text" th:field="*{surname}" name="contact-name" class="form-control"  required="true">
+                                                                <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.firstname}"></label>
+                                                                <input type="text" th:field="*{firstname}" name="contact-name" class="form-control"  required="">
+                                                                <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.middlename}"></label>
+                                                                <input type="text" th:field="*{othername}" name="contact-name" class="form-control"  >
+                                                                <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                     <div class="form-row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.email}"></label>
+                                                                <input type="email" name="contact-name" th:field="*{email}" class="form-control" id="planner-name" required="true">
+                                                                <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+
+
+
+                                                    </div>
+
+                                                    <div class="form-row">
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.phone}"></label>
+                                                                <input id="phone" type="number"  name="contact-name" th:field="*{phone}" class="form-control"  required="true">
+                                                                <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.confphone}"></label>
+                                                                <input id="phone2" type="number"  name="contact-name" th:field="*{phoneconf}" class="form-control"  required="true">
+                                                                <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="col-sm-6" >
+                                                            <div class="form-group">
+                                                            <label th:text="#{message.knowndob}"></label>
+                                                            <div class="d-flex flex-wrap">
+                                                                <div class="custom-control custom-radio mr-4">
+                                                                    <input type="radio" id="radio-3" value="true" name="knowdob"   class="custom-control-input">
+                                                                    <label class="custom-control-label" for="radio-3" th:text="#{message.yes}"></label>
+                                                                </div>
+                                                                <div class="custom-control custom-radio mr-4">
+                                                                    <input type="radio" id="radio-4" value="false" name="knowdob"   class="custom-control-input" checked="">
+                                                                    <label class="custom-control-label" for="radio-4" th:text="#{message.no}"></label>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6" id="dateofbirth">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.approxage}"></label>
+                                                                <input type="number" name="contact-name" th:field="*{estimatedage}"  class="form-control"   />
+                                                                <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group" id="enterage">
+                                                            <label th:text="#{message.dob}"></label>
+
+                                                            <input type="text"  th:field="*{dateofbirth}" class="form-control" id="dob" data-flatpickr data-alt-input="true" th:placeholder="#{message.selectdate}" data-date-format="Y-m-d">
+
+                                                            <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                    <div class="form-row">
+
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.idtype}"></label>
+                                                                <div class="position-relative">
+                                                                    <select   th:field="*{idtype}"   class="custom-select"  >
+                                                                        <option value="nin" th:text="#{message.nin}"></option>
+                                                                        <option value="dl" th:text="#{message.driverlicense}"></option>
+                                                                        <option value="ip" th:text="#{message.intpass}"></option>
+                                                                        <option value="vc" th:text="#{message.voterscard}"></option>
+                                                                        <option value="ot" th:text="#{message.notavail}"></option>
+                                                                    </select>
+                                                                    <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
+                                                                    <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="col-sm-3">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.sex}">Gender</label>
+                                                                <div class="custom-control custom-radio mr-4">
+                                                                    <input type="radio" id="radio-1" th:field="*{gender}" th:value="MALE" name="radio23" class="custom-control-input" required="true">
+                                                                    <label class="custom-control-label" for="radio-1" th:text="#{message.male}"></label>
+                                                                </div>
+                                                                <div  class="custom-control custom-radio mr-4">
+                                                                    <input type="radio" id="radio-2" th:field="*{gender}"  th:value="FEMALE" name="radio23" class="custom-control-input" required="true" >
+                                                                    <label class="custom-control-label" for="radio-2" th:text="#{message.female}"></label>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-3" id="iffemale">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.pregstat}"></label>
+                                                                <div class="custom-control custom-radio mr-4">
+                                                                    <input type="radio" id="radio-8"   value="true" name="pregnant" class="custom-control-input" >
+                                                                    <label class="custom-control-label" for="radio-8" th:text="#{message.yes}"></label>
+                                                                </div>
+                                                                <div class="custom-control custom-radio mr-4">
+                                                                    <input type="radio" id="radio-9" name="pregnant"  value="false" class="custom-control-input" checked="">
+                                                                    <label class="custom-control-label" for="radio-9" th:text="#{message.no}"></label>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+
+
+                                                    </div>
+
+
+
+
+
+
+
+                                                    <div class="form-row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group" >
+                                                                <label th:text="#{message.resdadd}"></label>
+                                                                <textarea type="text" name="resaddress" th:field="*{resaddress}" class="form-control"  />
+                                                                <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr/>
+                                                    <h6 th:text="#{message.workinfo}"></h6>
+
+                                                    <div class="form-row">
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.healthsec}"> </label>
+                                                                <div class="custom-control custom-radio mr-4">
+                                                                    <input type="radio" id="radio6" th:field="*{healthrelated}" th:value="Yes" name="radio" class="custom-control-input" required="true">
+                                                                    <label class="custom-control-label" for="radio6" th:text="#{message.yes}"></label>
+                                                                </div>
+                                                                <div  class="custom-control custom-radio mr-4">
+                                                                    <input type="radio" id="radio7" th:field="*{healthrelated}" th:value="No" name="radio" class="custom-control-input" required="true">
+                                                                    <label class="custom-control-label" for="radio7" th:text="#{message.no}"></label>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6" id="frontline">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.frontlineworker}"></label>
+                                                                <div class="custom-control custom-radio mr-4">
+                                                                    <input type="radio" id="radio8" name="radio2" th:field="*{frontline}" th:value="Yes" class="custom-control-input" >
+                                                                    <label class="custom-control-label" for="radio8" th:text="#{message.yes}"></label>
+                                                                </div>
+                                                                <div class="custom-control custom-radio mr-4">
+                                                                    <input type="radio" id="radio9" name="radio2" th:field="*{frontline}" th:value="No" class="custom-control-input" checked>
+                                                                    <label class="custom-control-label" for="radio9" th:text="#{message.no}"></label>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-sm-8" id="areawork">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.occupation}" > </label>
+                                                                <div class="position-relative">
+                                                                    <select id="areaofwork"  th:field="*{area}"   class="custom-select"  >
+
+                                                                        <option value="Doctors in isolation centers" th:text="#{message.doc}"></option>
+                                                                        <option value="Nurses in isolation centers" th:text="#{message.nurses}"></option>
+                                                                        <option value="Laboratory staff " th:text="#{message.labor}"> </option>
+                                                                        <option value="Other staff in testing centers" th:text="#{message.otherstaff}"></option>
+                                                                        <option value="Cleaners" th:text="#{message.cleaners}"></option>
+                                                                        <option value="Porters" th:text="#{message.porters}"></option>
+                                                                        <option value="Health assistants" th:text="#{message.healthass}"></option>
+                                                                        <option value="Ambulance drivers" th:text="#{message.ambulance}"></option>
+                                                                        <option value="Mortuary attendants" th:text="#{message.mortuary}"></option>
+                                                                        <option value="Health workers in public & private health facilities" th:text="#{message.healthworker}"></option>
+                                                                        <option value="Environmental officers" th:text="#{message.environmentaloff}"></option>
+                                                                        <option value="Medical Doctor" th:text="#{message.meddoc}"></option>
+                                                                        <option value="CHO" th:text="#{message.cho}"></option>
+                                                                        <option value="Nurse/Mid-wife" th:text="#{message.nurse}"></option>
+                                                                        <option value="SCHEW" th:text="#{message.schew}"></option>
+                                                                        <option value="JCHEW" th:text="#{message.jchew}"></option>
+                                                                        <option value="Environmental Health Staff" th:text="#{message.environment}"></option>
+                                                                        <option value="Lab Scientist" th:text="#{message.labscientist}"></option>
+                                                                        <option value="Pharmacist" th:text="#{message.pharmacist}"></option>
+                                                                        <option value="Pharmacy Technician" th:text="#{message.pharmatech}"></option>
+                                                                        <option value="Health Officer" th:text="#{message.healthoff}"></option>
+                                                                        <option value="Retiree" th:text="#{message.retiree}"></option>
+                                                                        <option value="Other Health Worker" th:text="#{message.otherhealth}"></option>
+
+
+                                                                    </select>
+                                                                    <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
+                                                                    <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="col-sm-6" id="frontlineyes">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.frontlinehealthworker}"></label>
+                                                                <div class="position-relative">
+                                                                    <select   th:field="*{area}"  class="custom-select"  >
+
+
+                                                                        <option value="q2_a" th:text="#{message.airport}"></option>
+                                                                        <option value="q2_b" th:text="#{message.armedforce}"></option>
+                                                                        <option value="q2_c" th:text="#{message.taskforce}"></option>
+                                                                        <option value="q2_d" th:text="#{message.traffic}"></option>
+                                                                        <option value="q2_e" th:text="#{message.polic}"></option>
+                                                                        <option value="q2_f" th:text="#{message.taxi}"> </option>
+                                                                        <option value="q2_g" th:text="#{message.resturant}"></option>
+                                                                        <option value="q2_h" th:text="#{message.petrol}"></option>
+                                                                        <option value="q2_i" th:text="#{message.patent}"></option>
+                                                                        <option value="q2_j" th:text="#{message.Other}">Others</option>
+                                                                    </select>
+                                                                    <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
+                                                                    <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6" id="frontlineno">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.occupation}"></label>
+                                                                <input type="text" name="contact-name" th:field="*{occupation}" class="form-control"  >
+                                                                <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <hr/>
+                                                    <h6 th:text="#{message.healthhistory}"></h6>
+                                                    <div class="form-row">
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.anyknownmed}"></label>
+                                                                <div class="custom-control custom-radio mr-4">
+                                                                    <input type="radio" id="radio12" name="radio35" th:field="*{medicalconditionpresent}"  th:value="Yes" class="custom-control-input" required="true">
+                                                                    <label class="custom-control-label" for="radio12" th:text="#{message.yes}"></label>
+                                                                </div>
+                                                                <div  class="custom-control custom-radio mr-4">
+                                                                    <input type="radio" id="radio13" name="radio35" class="custom-control-input" th:value="No" th:field="*{medicalconditionpresent}" required="true">
+                                                                    <label class="custom-control-label" for="radio13" th:text="#{message.no}"></label>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-8" id="medcond">
+                                                            <div class="form-group">
+
+                                                                <label th:text="#{message.selectcondition}"></label>
+                                                                <div class="d-flex flex-wrap">
+                                                                    <div class="custom-control custom-checkbox mr-4">
+                                                                        <input type="checkbox" class="custom-control-input" id="check-1">
+                                                                        <label class="custom-control-label" for="check-1" th:text="#{message.heartdisease}"></label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-checkbox mr-4">
+                                                                        <input type="checkbox" class="custom-control-input" id="check-2" >
+                                                                        <label class="custom-control-label" for="check-2" th:text="#{message.kidney}">
+                                                                        </label>
+                                                                    </div>
+
+
+
+                                                                    <div class="custom-control custom-checkbox mr-4">
+                                                                        <input type="checkbox" class="custom-control-input" id="check-4" >
+                                                                        <label class="custom-control-label" for="check-4" th:text="#{message.liver}">
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <div class="custom-control custom-checkbox mr-4">
+                                                                        <input type="checkbox" class="custom-control-input" id="check-5" >
+                                                                        <label class="custom-control-label" for="check-5" th:text="#{message.sicklecell}">
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-checkbox mr-4">
+                                                                        <input type="checkbox" class="custom-control-input" id="check-7" >
+                                                                        <label class="custom-control-label" for="check-7" th:text="#{message.hyper}">
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-checkbox mr-4">
+                                                                        <input type="checkbox" class="custom-control-input" id="check-6" >
+                                                                        <label class="custom-control-label" for="check-6" th:text="#{message.chronic}">
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-checkbox mr-4">
+                                                                        <input type="checkbox" class="custom-control-input" id="check-3" >
+                                                                        <label class="custom-control-label" for="check-3" th:text="#{message.diabetes}">
+                                                                        </label>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <br/>
+
+                                                    <h6 th:text="#{message.scheduleinfo}"></h6>
+
+                                                    <div class="form-row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.prefstate}"></label>
+                                                                <div class="position-relative">
+                                                                    <select id="stateofres" th:field="*{stateresidence}" class="custom-select" required="true">
+
+                                                                        <option selected value="" th:text="#{message.selectoption}"></option>
+                                                                        <option th:each="stat : ${states}"
+                                                                                th:value="${stat}"
+                                                                                th:utext="${stat}"/>
+                                                                    </select>
+                                                                    <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
+                                                                    <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.preflga}" ></label>
+                                                                <div class="position-relative">
+                                                                    <select id="lgaselect" class="custom-select" th:field="*{lga}" required="true">
+
+                                                                        <option selected value="" th:text="#{message.selectoption}"> </option>
+
+                                                                    </select>
+                                                                    <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
+                                                                    <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-row">
+
+
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.prefvacsite}" ></label>
+                                                                <div class="position-relative">
+                                                                    <select id="facility" name="facility2" class="custom-select" th:field="*{facilityid}" required="true" >
+
+                                                                        <option selected value="0" th:text="#{message.selectoption}"> </option>
+
+                                                                    </select>
+                                                                    <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
+                                                                    <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label th:text="#{message.prefdate}"></label>
+                                                                <input id="prefdate" type="text" class="form-control" th:field="*{date}" data-flatpickr data-alt-input="true" th:placeholder="#{message.selectdate}" data-date-format="Y-m-d">
+                                                                <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label th:text="#{messgae.preftime}" ></label>
+                                                                <div class="position-relative">
+                                                                    <select id="sessionselect" name="session" class="custom-select" th:field="*{session}" required="true">
+                                                                        <option selected value="" th:text="#{message.selectoption}"> </option>
+
+                                                                    </select>
+                                                                    <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
+                                                                    <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                     </div>
+
+
+
+
+
+
+
+
+
+
+
+                                                    <div class="d-flex flex-column flex-wrap flex-md-row justify-content-between align-items-center">
+
+                                                        <div id="serverresponse" class="alert bg-secondary alert-dismissible fade show" role="alert">
+
+                                                        </div>
+
+
+
+                                                        <button class="btn btn-primary btn-sm " type="button" data-loading-text="Sending" id="btncheckava">
+                                                            <!-- Icon for loading animation -->
+                                                            <svg id="loading-spinner" class="icon bg-white" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48">
+                                                                <g fill="none">
+                                                                    <path id="track" fill="#C6CCD2" d="M24,48 C10.745166,48 0,37.254834 0,24 C0,10.745166 10.745166,0 24,0 C37.254834,0 48,10.745166 48,24 C48,37.254834 37.254834,48 24,48 Z M24,44 C35.045695,44 44,35.045695 44,24 C44,12.954305 35.045695,4 24,4 C12.954305,4 4,12.954305 4,24 C4,35.045695 12.954305,44 24,44 Z"/>
+                                                                    <path id="section" fill="#3F4850" d="M24,0 C37.254834,0 48,10.745166 48,24 L44,24 C44,12.954305 35.045695,4 24,4 L24,0 Z"/>
+                                                                </g>
+                                                            </svg>
+
+                                                            <span th:text="#{message.checkavailable}"></span>
+                                                        </button>
+
+
+
+
+
+                                                    </div>
+
+
+                                                    <br/>
+                                                    <br/>
+
+                                                    <div class="col-12">
+                                                        <div data-recaptcha data-sitekey="6LcGFv8bAAAAACRCECQ8lxgJvV406wABJyN6RWbA"></div>
+                                                    </div>
+
+                                                    <div class="row justify-content-center text-center mt-md-n4">
+                                                        <div class="col-auto">
+
+                                                            <div class="d-none alert alert-success w-100 my-md-3" role="alert" data-success-message>
+                                                                Thanks, a member of our team will be in touch shortly.
+                                                            </div>
+                                                            <div class="d-none alert alert-danger w-100 my-md-3" role="alert" data-error-message>
+                                                                Please fill all fields correctly.
+                                                            </div>
+                                                            <button class="btn btn-primary btn-md btn-loading" type="submit" data-loading-text="Sending" id="bookbtn">
+                                                                <!-- Icon for loading animation -->
+                                                                <svg class="icon bg-white" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48">
+                                                                    <g fill="none">
+                                                                        <path id="track" fill="#C6CCD2" d="M24,48 C10.745166,48 0,37.254834 0,24 C0,10.745166 10.745166,0 24,0 C37.254834,0 48,10.745166 48,24 C48,37.254834 37.254834,48 24,48 Z M24,44 C35.045695,44 44,35.045695 44,24 C44,12.954305 35.045695,4 24,4 C12.954305,4 4,12.954305 4,24 C4,35.045695 12.954305,44 24,44 Z"/>
+                                                                        <path id="section" fill="#3F4850" d="M24,0 C37.254834,0 48,10.745166 48,24 L44,24 C44,12.954305 35.045695,4 24,4 L24,0 Z"/>
+                                                                    </g>
+                                                                </svg>
+
+                                                                <span th:text="#{message.submit}"></span>
+                                                            </button>
+
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+
+
+
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+<div class="modal fade" id="advertnotice" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content row flex-row no-gutters border-0">
+            <div class="col-lg-6">
+                <img src="assets/img/okay.png" alt="Image" class="rounded-left img-fluid">
+            </div>
+            <div class="col-lg-6 d-flex flex-column">
+                <div class="modal-header text-center border-0 p-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">
+                  <img src="assets/img/icons/interface/icon-x.svg" alt="Icon">
+                </span>
+                    </button>
+                </div>
+                <div class="modal-body p-md-5 flex-fill d-flex flex-column ">
+                    <div>
+                        <h6 class="h6 text-center"><b th:text="#{message.emid}">Electronic Management of Immunization Data (EMID)</b></h6>
+                        <p class="text-center"><b th:text="#{message.registrationportal}">Registration Portal</b></p>
+
+                        <p th:text="#{message.modalmsg1}"></p>
+                        <p th:text="#{message.modalmsg2}"></p>
+                        <p th:text="#{message.modalmsg3}"></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Required vendor scripts (Do not remove) -->
+<script type="text/javascript" th:src="@{/assets/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/bootstrap.js}"></script>
+
+<!-- Optional Vendor Scripts (Remove the plugin script here and comment initializer script out of index.js if site does not use that feature) -->
+
+<!-- AOS (Animate On Scroll - animates elements into view while scrolling down) -->
+<script type="text/javascript" th:src="@{/assets/js/aos.js}"></script>
+<!-- Clipboard (copies content from browser into OS clipboard) -->
+<script type="text/javascript" th:src="@{/assets/js/clipboard.min.js}"></script>
+<!-- Flatpickr (calendar/date/time picker UI) -->
+<script type="text/javascript" th:src="@{/assets/js/flatpickr.min.js}"></script>
+<!-- Flickity (handles touch enabled carousels and sliders) -->
+<script type="text/javascript" src="assets/js/flickity.pkgd.min.js"></script>
+<!-- Ion rangeSlider (flexible and pretty range slider elements) -->
+<script type="text/javascript" th:src="@{/assets/js/ion.rangeSlider.min.js}"></script>
+<!-- jQuery Countdown (displays countdown text to a specified date) -->
+<script type="text/javascript" th:src="@{/assets/js/jquery.countdown.min.js}"></script>
+<!-- ScrollMonitor (manages events for elements scrolling in and out of view) -->
+<script type="text/javascript" th:src="@{/assets/js/scrollMonitor.js}"></script>
+<!-- Smooth scroll (animation to links in-page)-->
+<script type="text/javascript" th:src="@{/assets/js/smooth-scroll.polyfills.min.js}"></script>
+<!-- SVGIn\jector (replaces img tags with SVG code to allow easy inclusion of SVGs with the benefit of inheriting colors and styles)-->
+<script type="text/javascript" th:src="@{/assets/js/svg-injector.umd.production.js}"></script>
+<!-- TwitterFetcher (displays a feed of tweets from a specified account)-->
+<!-- Required theme scripts (Do not remove) -->
+<script type="text/javascript" th:src="@{/assets/js/theme.js}"></script>
+
+
+<!-- Removes page load animation when window is finished loading -->
+<script type="text/javascript">
+    window.addEventListener("load",function(){
+        document.querySelector('body').classList.add('loaded');
+        $('#advertnotice').modal('show');
+        function rmydays(date) {
+            return (date.getDay() === 0 || date.getDay() === 6);
+        }
+
+        var dateToday = new Date();
+        flatpickr('#dob', {
+            maxDate:"2003-12-31",
+            minDate:"1919-12-31"
+        });
+
+        flatpickr('#prefdate', {
+            minDate:"2021-08-17",
+            maxDate:"2021-09-01"
+        });
+
+
+    });
+</script>
+
+<script>
+
+
+    const btncheckava = document.getElementById("btncheckava");
+    const loading = document.getElementById("loading-spinner");
+    const bookbtn = document.getElementById("bookbtn");
+    const stateselect= document.getElementById("stateofres")
+    const erroralert= document.getElementById("serverresponse");
+    const ifpregnant= document.getElementById("iffemale");
+
+    const lgaselect= document.getElementById("lgaselect");
+    const facilityselect= document.getElementById("facility");
+    const femaleradio= document.getElementById("radio-2");
+    const maleradio= document.getElementById("radio-1");
+
+    const yeshealth= document.getElementById("radio6");
+    const nohealth= document.getElementById("radio7");
+
+    const frontrdyes= document.getElementById("radio8");
+    const frontrdno= document.getElementById("radio9");
+
+    const frontlinediv= document.getElementById("frontline");
+    const areaofworkdiv= document.getElementById("areawork");
+    //const scheduleinfo= document.getElementById("scheduleinfo");
+
+    const frontlineyes= document.getElementById("frontlineyes");
+    const frontlineno= document.getElementById("frontlineno");
+    const medcon= document.getElementById("medcond");
+
+    const medconyes= document.getElementById("radio12");
+    const medconno= document.getElementById("radio13");
+
+    const dateinput= document.getElementById("dateofbirth");
+    const numberage= document.getElementById("enterage");
+
+    const ageNO= document.getElementById("radio-4");
+    const ageYES= document.getElementById("radio-3");
+
+
+
+
+
+
+
+    loading.style.display = "none";
+    bookbtn.style.display='none';
+    erroralert.style.display="none";
+    ifpregnant.style.display="none";
+    medcon.style.display="none";
+
+    areaofworkdiv.style.display="none";
+    //scheduleinfo.style.display="none";
+    frontlinediv.style.display="none";
+    frontlineyes.style.display="none";
+    frontlineno.style.display="none";
+    numberage.style.display="none";
+
+    btncheckava.addEventListener("click", handleFormSubmit);
+    stateselect.addEventListener("change", populateLGA);
+    lgaselect.addEventListener("change", populateFacility)
+
+    facilityselect.addEventListener("change", populateSession);
+    femaleradio.addEventListener("change", showpregantform)
+    maleradio.addEventListener("change",showpregantform )
+    yeshealth.addEventListener("change", showworkform);
+    nohealth.addEventListener("change", showworkform);
+    frontrdyes.addEventListener("change", showfrontline);
+    frontrdno.addEventListener("change", showfrontline);
+    medconyes.addEventListener("change", showmedcon);
+    medconno.addEventListener("change", showmedcon);
+    ageNO.addEventListener("change", showestimatedage );
+    ageYES.addEventListener("change", showestimatedage2 );
+
+
+
+
+
+    async function showestimatedage(event) {
+
+        if(ageNO.checked){
+
+            dateinput.style.display="block";
+            numberage.style.display="none";
+        }else{
+            dateinput.style.display="none";
+            numberage.style.display="block";
+
+        }
+
+
+    }
+
+    async function showestimatedage2(event) {
+
+        if(ageYES.checked){
+
+            numberage.style.display="block";
+            dateinput.style.display="none";
+        }else {
+            numberage.style.display="none";
+            dateinput.style.display="block";
+
+        }
+
+
+    }
+
+
+    async function showfrontline(event) {
+        const frontlineyes= document.getElementById("frontlineyes");
+        const frontlineno= document.getElementById("frontlineno");
+        if(document.getElementById("radio8").checked){
+
+            frontlineno.style.display="none";
+            //scheduleinfo.style.display="flex";
+            frontlineyes.style.display="block";
+        }else if(document.getElementById("radio9").checked) {
+            frontlineyes.style.display="none";
+            frontlineno.style.display="block";
+            //scheduleinfo.style.display="none";
+        }
+
+
+    }
+
+
+    async function showmedcon(event) {
+
+        if(document.getElementById("radio12").checked){
+
+            medcon.style.display="block";
+        }else if(document.getElementById("radio13").checked) {
+            medcon.style.display="none";
+
+        }
+
+
+    }
+
+
+
+
+    async function showworkform(event) {
+        const areaofworkdiv= document.getElementById("areawork");
+
+       // const scheduleinfo= document.getElementById("scheduleinfo");
+        const frontlinediv= document.getElementById("frontline");
+
+        const frontlineyes= document.getElementById("frontlineyes");
+        const frontlineno= document.getElementById("frontlineno");
+        if(document.getElementById("radio6").checked){
+
+            frontlinediv.style.display="none";
+            frontlineyes.style.display="none";
+            frontlineno.style.display="none";
+
+            areaofworkdiv.style.display="block";
+            console.log("should open")
+           // scheduleinfo.style.display="flex";
+        }else if(document.getElementById("radio7").checked) {
+            areaofworkdiv.style.display="none";
+           // scheduleinfo.style.display="none";
+            frontlinediv.style.display="block";
+
+            const frontlineyes= document.getElementById("frontlineyes");
+            const frontlineno= document.getElementById("frontlineno");
+            if(document.getElementById("radio8").checked){
+
+                frontlineno.style.display="none";
+               // scheduleinfo.style.display="flex";
+                frontlineyes.style.display="block";
+
+            }else if(document.getElementById("radio9").checked) {
+                frontlineyes.style.display="none";
+                frontlineno.style.display="block";
+               // scheduleinfo.style.display="none";
+            }
+
+
+        }
+
+
+    }
+
+    async function showpregantform(event) {
+        if(document.getElementById("radio-2").checked){
+
+            const ifpregnant= document.getElementById("iffemale");
+            ifpregnant.style.display="block";
+        }else if(document.getElementById("radio-1").checked) {
+            const ifpregnant= document.getElementById("iffemale");
+            ifpregnant.style.display="none";
+        }
+
+
+    }
+
+    async function postFormDataAsJson({ url }) {
+
+        var e = document.getElementById("facility");
+        var strUser = e.value;
+
+        const fetchOptions = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            }
+        };
+
+        const response = await fetch("/checkavailability?facility="+strUser, fetchOptions);
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            const loading = document.getElementById("loading-spinner");
+            loading.style.display = "none";
+            erroralert.style.display = "inline-block";
+            setTimeout(function () { $("#serverresponse").fadeOut(1500); }, 3000)
+            throw new Error(errorMessage);
+
+        }
+
+        const loading = document.getElementById("loading-spinner");
+        loading.style.display = "none";
+        // successalert.style.display = "block";
+        // $('#mc-embedded-subscribe-form')[0].reset();
+        // setTimeout(function () { $("#success-alert").fadeOut(1500); }, 3000)
+        //
+        // document.getElementById("btsn").value = "Submit";
+
+
+
+        return response;
+    }
+
+
+    async function handleFormSubmit(event) {
+
+        const loading = document.getElementById("loading-spinner");
+        loading.style.display = "block";
+
+        const gd=document.getElementById("facility");
+        const x = gd.options[gd.selectedIndex].text;
+
+        document.getElementById("btncheckava").value = "Processing...";
+        event.preventDefault();
+
+        const form = event.currentTarget;
+        const url = form.action;
+
+        var facilityid = document.getElementById("facility").value;
+        var timeslot = document.getElementById("sessionselect").value;
+        var prefdate = document.getElementById("prefdate").value;
+
+        console.log("logging"+facilityid);
+        $.ajax({
+            type: 'GET',
+            url: "/checkavailability?roomid="+facilityid+"&timeslot="+ timeslot+ "&date="+ prefdate,
+            success: function(data){
+
+
+                console.log(data)
+                var status= data.string;
+                console.log(status);
+
+
+
+                if(status=="OPEN"){
+                    document.getElementById("serverresponse").innerHTML = x+ " OPEN  - <br/> "+ prefdate
+                    +" session -  "+timeslot + "  Click submit to confirm or select another date / time/ health facility" ;
+
+                    document.getElementById("bookbtn").style.display="block";
+                }else{
+                    document.getElementById("serverresponse").innerHTML = "THIS Facility IS CLOSED PLEASE SELECT ANOTHER HEALTH FACILITY, DATE AND SESSION ";
+                }
+
+                // for(var i=0; i<data.length; i++){
+                //     option = option + "<option value='"+data[i].timeslot + "'>"+data[i].timeslot + "</option>";
+                // }
+
+                const loading = document.getElementById("loading-spinner");
+                loading.style.display = "none";
+              erroralert.style.display = "block";
+
+            },
+            error:function(){
+                const loading = document.getElementById("loading-spinner");
+               loading.style.display = "none";
+            }
+
+        });
+    }
+
+
+    async function populateLGA(event) {
+
+        var stateid = document.getElementById("stateofres").value;
+        console.log(stateid);
+        $.ajax({
+            type: 'GET',
+            url: "/getlga/" + stateid,
+            success: function(data){
+                var slctSubcat=$('#lgaselect'), option="";
+                slctSubcat.empty();
+                console.log(data)
+
+                for(var i=0; i<data.length; i++){
+                    option = option + "<option value='"+data[i].lga + "'>"+data[i].lga+ "</option>";
+                }
+                slctSubcat.append(option);
+
+                populateFacility();
+            },
+            error:function(){
+                alert("please select a valid state");
+            }
+
+        });
+
+    }
+
+
+
+
+    async function populateFacility(event) {
+        var lgaid = document.getElementById("lgaselect").value;
+
+
+        $.ajax({
+            type: 'GET',
+            url: "/getfacility?lgaid=" + lgaid,
+            success: function(data){
+                var slctSubcat=$('#facility'), option="";
+                slctSubcat.empty();
+                console.log(data);
+                console.log("checking facility "+data)
+
+
+                for(var i=0; i<data.length; i++){
+                    option = option + "<option value='"+data[i].healthCenterId + "'>"+data[i].healthCenter + "</option>";
+                }
+                slctSubcat.append(option);
+                populateSession();
+            },
+            error:function(){
+                alert("error");
+            }
+
+        });
+    }
+
+
+    async function populateSession(event) {
+        var facilityid = document.getElementById("facility").value;
+
+        console.log("logging fsx"+facilityid);
+        if(facilityid!=""){
+            console.log("logging"+facilityid);
+            $.ajax({
+                type: 'GET',
+                url: "/getroomsessions/"+facilityid,
+                success: function(data){
+                    var slctSubcat=$('#sessionselect'), option="";
+                    slctSubcat.empty();
+                    console.log(data)
+
+                    for(var i=0; i<data.length; i++){
+                        option = option + "<option value='"+data[i].timeslot + "'>"+data[i].timeslot + "</option>";
+                    }
+                    slctSubcat.append(option);
+                },
+                error:function(){
+                    alert("error");
+                }
+
+            });
+
+        }
+        var slctSubcat=$('#sessionselect'), option="";
+        slctSubcat.empty();
+
+    }
+
+
+
+
+</script>
+
+</body>
+
+</html>
