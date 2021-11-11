@@ -1,0 +1,278 @@
+
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52115242-17"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-52115242-17');
+    </script>
+
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bootstrap HTML template and UI kit by Medium Rare">
+    <!-- Begin loading animation -->
+    <style>
+        @keyframes hideLoader{ 0%{ width: 100%; height: 100%; } 100%{ width: 0; height: 0; } } body > div.loader{ position: fixed; background: white; width: 100%; height: 100%; z-index: 1071; opacity: 0; transition: opacity .5s ease; overflow: hidden; pointer-events: none; display: flex; align-items: center; justify-content: center; } body:not(.loaded) > div.loader{ opacity: 1; } body:not(.loaded){ overflow: hidden; } body.loaded > div.loader{ animation: hideLoader .5s linear .5s forwards; } .loading-animation{width:40px;height:40px;margin:100px auto;background-color:#009B72;border-radius:100%;animation:pulse 1s infinite ease-in-out}@keyframes pulse{0%{-webkit-transform:scale(0);transform:scale(0)}100%{-webkit-transform:scale(1);transform:scale(1);opacity:0}}
+    </style>
+    <script type="text/javascript">
+        window.addEventListener("load",function(){document.querySelector('body').classList.add('loaded');});
+    </script>
+    <!-- End loading animation -->
+    <!-- Begin loading animation -->
+    <link th:href="@{/assets/css/loaders/loader-pulse.css}" rel="stylesheet" type="text/css" media="all" />
+    <!-- End loading animation -->
+    <link th:href="@{/assets/css/theme.css}" rel="stylesheet" type="text/css" media="all" />
+    <link th:href="@{/assets/css/custom.css}" rel="stylesheet" type="text/css" media="all" />
+</head>
+
+<body>
+
+<div class="navbar-container">
+    <nav class="navbar navbar-expand-lg bg-white navbar-light" data-sticky="top">
+        <div class="container">
+            <a href="/" class="text-center  fade-page mb-3">
+
+                <img th:src="@{/images/ED.svg}" width="120px" alt="nigeria logo">
+            </a>
+            <div class="d-flex align-items-center order-lg-3">
+                <a href="https://themeforest.net/item/jumpstart-app-and-software-template/24207799" class="btn btn-primary ml-lg-4 mr-3 mr-md-4 mr-lg-0 d-none d-sm-block order-lg-3">Verification Portal</a>
+                <button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+                    <img alt="Navbar Toggler Open Icon" class="navbar-toggler-open icon icon-sm"  th:src="@{/assets/img/icons/interface/icon-menu.svg}">
+                    <img alt="Navbar Toggler Close Icon" class="navbar-toggler-close icon icon-sm"  th:href="@{/assets/img/icons/interface/icon-x.svg}">
+                </button>
+            </div>
+            <div class="collapse navbar-collapse order-3 order-lg-2 justify-content-lg-end" id="navigation-menu">
+                <ul class="navbar-nav my-3 my-lg-0">
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a aria-haspopup="true" class="nav-link nav-item arrow-bottom"  href="/" role="button">Registration</a>
+
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a  class=" nav-link nav-item " data-toggle="dropdown-grid" href="#" role="button">Vaccination Sites</a>
+
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<section class="bg-primary-3">
+    <div class="container">
+        <div class="row section-title justify-content-center text-center">
+            <div class="col-md-9 col-lg-8 col-xl-7">
+                <h1 class="display-5  text-white">COVID-19 verification guide</h1>
+
+            </div>
+        </div>
+
+        <div class="row align-items-start justify-content-between">
+
+            <div class="col-lg-12">
+                <div class="row mb-md-5 mb-4">
+                    <div class="col">
+                        <div id="faq-accordion">
+                            <div class="card mb-2 mb-md-3">
+                                <a href="#accordion-1" data-toggle="collapse" role="button" aria-expanded="false" class="p-3 p-md-4">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0 mr-2">How to scan the QR-CODE on your vaccination card</h6>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="injected-svg icon icon-sm" data-src="assets/img/icons/interface/icon-caret-right.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <path d="M14.376 11.584C14.6728 11.7819 14.6728 12.2181 14.376 12.416L9.77735 15.4818C9.44507 15.7033 9 15.4651 9 15.0657L9 8.93426C9 8.53491 9.44507 8.29671 9.77735 8.51823L14.376 11.584Z" fill="#2C3038"></path>
+                                        </svg>
+                                    </div>
+                                </a>
+                                <div class="collapse" id="accordion-1" data-parent="#faq-accordion">
+                                    <div class="px-3 px-md-4 pb-3 pb-md-4">
+                                        The QR-CODE is located on your COVID-19 vaccination card typically at the bottom right on the cover page.
+                                        <br/>
+                                        You can scan the code by using the camera of your mobile device/tablet. For devices that do not support scanning QR code directly from the device camera. You can download a QR-CODE scanner application on the Apple store or google playstore.
+                                        <br/>
+                                        Note: if you are unable to scan your QR-CODE due to physical damage please visit the  vaccination site where you took the 1st dose or any of the supersites located in all the 36 states and FCT for replacement. The list can be accessed on NPHCDA website: www.nphcda.gov.ng
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2 mb-md-3">
+                                <a href="#accordion-2" data-toggle="collapse" role="button" aria-expanded="false" class="p-3 p-md-4">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0 mr-2">Incorrect details? Name, DOB, ID Type and ID Number</h6>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="injected-svg icon icon-sm" data-src="assets/img/icons/interface/icon-caret-right.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <path d="M14.376 11.584C14.6728 11.7819 14.6728 12.2181 14.376 12.416L9.77735 15.4818C9.44507 15.7033 9 15.4651 9 15.0657L9 8.93426C9 8.53491 9.44507 8.29671 9.77735 8.51823L14.376 11.584Z" fill="#2C3038"></path>
+                                        </svg>
+                                    </div>
+                                </a>
+                                <div class="collapse" id="accordion-2" data-parent="#faq-accordion">
+                                    <div class="px-3 px-md-4 pb-3 pb-md-4">
+                                        a.      Click on the “update” button at the top of your e-certificate.<br/>
+                                        Note: if you do not see this button at the top of your e-certificate. please contact the NPHCDA COVID-19 call center on 0700 220 1122 for assistance
+                                        <br/>
+                                        b.      When you click on “update” button, a popup will appear for you to enter the phone number or email address [1] you provided during registration.
+                                        <br/>
+                                        Click the “confirm” button when you have entered your phone number or email [2]
+                                        <br/>
+                                        c.       if you enter the correct details. you would be granted access and redirected to your profile page where you will be able to edit any incorrect detail.
+                                        <br/>
+                                        click ‘save profile’ [1] when you are done
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2 mb-md-3">
+                                <a href="#accordion-3" data-toggle="collapse" role="button" aria-expanded="false" class="p-3 p-md-4">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0 mr-2">Incorrect vaccination details? status, batch number ... </h6>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="injected-svg icon icon-sm" data-src="assets/img/icons/interface/icon-caret-right.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <path d="M14.376 11.584C14.6728 11.7819 14.6728 12.2181 14.376 12.416L9.77735 15.4818C9.44507 15.7033 9 15.4651 9 15.0657L9 8.93426C9 8.53491 9.44507 8.29671 9.77735 8.51823L14.376 11.584Z" fill="#2C3038"></path>
+                                        </svg>
+                                    </div>
+                                </a>
+                                <div class="collapse" id="accordion-3" data-parent="#faq-accordion">
+                                    <div class="px-3 px-md-4 pb-3 pb-md-4">
+                                        a.      Click on the “update” button at the top of your e-certificate.<br/>
+                                        Note: if you do not see this button at the top of your e-certificate.
+                                        <br/>please call the NPHCDA COVID-19 call centre on 0700 220 1122 for assistance.
+                                        <br/>
+                                        b.    When you click on “update” button, a popup will appear for you to to enter the phone number or email address [1] you provided during registration.
+                                        <br/>
+                                        Click the “confirm” button [2]
+                                        <br/>
+                                        c.   	if you enter the correct details. you will be granted access and redirected to your profile page.
+                                        <br/>
+                                        d.  	To view your vaccination record, click on ‘vaccination history’ [1]
+                                        <br/>
+                                        e.   Please contact any of the numbers provided at the bottom of the page to assist in resolving any issue on the vaccination history.
+                                        <br/>
+                                        If you are unable to contact them, please call the NPHCDA COVID-19 call center on 0700 220 1122
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-2 mb-md-3">
+                                <a href="#accordion-3" data-toggle="collapse" role="button" aria-expanded="false" class="p-3 p-md-4">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0 mr-2">Due for second dose?</h6>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="injected-svg icon icon-sm" data-src="assets/img/icons/interface/icon-caret-right.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <path d="M14.376 11.584C14.6728 11.7819 14.6728 12.2181 14.376 12.416L9.77735 15.4818C9.44507 15.7033 9 15.4651 9 15.0657L9 8.93426C9 8.53491 9.44507 8.29671 9.77735 8.51823L14.376 11.584Z" fill="#2C3038"></path>
+                                        </svg>
+                                    </div>
+                                </a>
+                                <div class="collapse" id="accordion-3" data-parent="#faq-accordion">
+                                    <div class="px-3 px-md-4 pb-3 pb-md-4">
+                                        A notification will be displayed as soon as you scan your QR code.
+                                        <br/>
+                                        A link to the list of the vaccination sites will be displayed to enable you select your preferred site.
+                                       </div>
+                                </div>
+                            </div>
+
+
+                            <div class="card mb-2 mb-md-3">
+                                <a href="#accordion-3" data-toggle="collapse" role="button" aria-expanded="false" class="p-3 p-md-4">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0 mr-2">ERROR: record has not been linked or might not exist message</h6>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="injected-svg icon icon-sm" data-src="assets/img/icons/interface/icon-caret-right.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <path d="M14.376 11.584C14.6728 11.7819 14.6728 12.2181 14.376 12.416L9.77735 15.4818C9.44507 15.7033 9 15.4651 9 15.0657L9 8.93426C9 8.53491 9.44507 8.29671 9.77735 8.51823L14.376 11.584Z" fill="#2C3038"></path>
+                                        </svg>
+                                    </div>
+                                </a>
+                                <div class="collapse" id="accordion-3" data-parent="#faq-accordion">
+                                    <div class="px-3 px-md-4 pb-3 pb-md-4">
+                                        After scanning your QR code, if a prompt showing “record has not been linked or might not exist” pops up,
+                                        <br/>
+                                        please call the NPHCDA's COVID-19 call centre on 0700 220 1122 or the state representatives as listed on the portal for assistance.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center text-center mt-md-n4">
+            <div class="col-auto">
+
+                <a href="" class="btn btn-primary btn-lg"> ▶ click here to watch video</a>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+
+
+
+
+
+
+<a href="#top" class="btn btn-primary rounded-circle btn-back-to-top" data-smooth-scroll data-aos="fade-up" data-aos-offset="2000" data-aos-mirror="true" data-aos-once="false">
+    <img src="assets/img/icons/interface/icon-arrow-up.svg" alt="Icon" class="icon bg-white" >
+</a>
+<!-- Required vendor scripts (Do not remove) -->
+<script type="text/javascript" th:src="@{/assets/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/bootstrap.js}"></script>
+
+<!-- Optional Vendor Scripts (Remove the plugin script here and comment initializer script out of index.js if site does not use that feature) -->
+
+<!-- AOS (Animate On Scroll - animates elements into view while scrolling down) -->
+<script type="text/javascript" th:src="@{/assets/js/aos.js}"></script>
+<!-- Clipboard (copies content from browser into OS clipboard) -->
+<script type="text/javascript" th:src="@{/assets/js/clipboard.min.js}"></script>
+<!-- Flatpickr (calendar/date/time picker UI) -->
+<script type="text/javascript" th:src="@{/assets/js/flatpickr.min.js}"></script>
+<!-- Flickity (handles touch enabled carousels and sliders) -->
+<script type="text/javascript" src="assets/js/flickity.pkgd.min.js"></script>
+<!-- Ion rangeSlider (flexible and pretty range slider elements) -->
+<script type="text/javascript" th:src="@{/assets/js/ion.rangeSlider.min.js}"></script>
+<!-- jQuery Countdown (displays countdown text to a specified date) -->
+<script type="text/javascript" th:src="@{/assets/js/jquery.countdown.min.js}"></script>
+<!-- ScrollMonitor (manages events for elements scrolling in and out of view) -->
+<script type="text/javascript" th:src="@{/assets/js/scrollMonitor.js}"></script>
+<!-- Smooth scroll (animation to links in-page)-->
+<script type="text/javascript" th:src="@{/assets/js/smooth-scroll.polyfills.min.js}"></script>
+<!-- SVGIn\jector (replaces img tags with SVG code to allow easy inclusion of SVGs with the benefit of inheriting colors and styles)-->
+<script type="text/javascript" th:src="@{/assets/js/svg-injector.umd.production.js}"></script>
+<!-- TwitterFetcher (displays a feed of tweets from a specified account)-->
+<!-- Required theme scripts (Do not remove) -->
+<script type="text/javascript" th:src="@{/assets/js/theme.js}"></script>
+<!-- This script appears only on the demo.  It is used to delay unnecessary image loading until after the main page content is loaded. -->
+<script type="text/javascript">
+    window.addEventListener("load",function(){
+        setTimeout(function() {
+            const delayedImages = document.querySelectorAll('[data-delay-src]');
+            theme.mrUtil.forEach(delayedImages, (index, elem) => {
+                const source = elem.getAttribute('data-delay-src');
+            elem.removeAttribute('data-delay-src');
+            elem.setAttribute('src', source);
+        });
+        }, 500);
+    });
+</script>
+
+<script type="text/javascript">
+    // This script appears only in the demo - it disables forms with no action attribute to prevent
+    // navigating away from the page.
+    jQuery("form:not([action])").on('submit', function(){return false;});
+</script>
+
+</body>
+
+</html>

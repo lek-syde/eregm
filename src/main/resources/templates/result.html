@@ -127,7 +127,7 @@
 
                                 <div class="col-4">
                                     <a href="/" class="text-center  fade-page mb-3">
-                                        <img th:src="@{/images/ED.svg}" width="120px" alt="nigeria logo" data-inject-svg>
+                                        <img th:src="@{/images/ED.svg}" width="120px" alt="nigeria logo">
                                     </a>
                                 </div>
 
@@ -162,20 +162,42 @@
                                         <span class="text-center">
                                             <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><circle class="circle" cx="30" cy="30" r="30" fill="none"/><path class="check" fill="none" d="m12.5 28l10.0 13 24-22.2"/></svg>
                                             <h1>Vaccination Booking confirmed</h1>
-                                              </span>
+                                        </span>
+
+                                        <p>Issued by the National Primary Health Care Development Agency (NPHCDA)</p>
+                                        <hr/>
 
 
 
                                         <div class="row justify-content-between mb-4 mb-md-5">
                                             <div class="col-sm">
-                                                <h6>Health Facility:</h6>
+
+
                                                 <div>
-                                                    <div>[[${userProfile.stateresidence}]]</div>
-                                                    <div>[[${userProfile.lga}]]</div>
+
                                                     <address>
                                                         [[${userProfile.healthfacility}]]
                                                         <br>
                                                     </address>
+                                                </div>
+
+
+                                                <h6>Health Facility:</h6>
+                                                <div>
+                                                    <div>[[${userProfile.stateresidence}]]</div>
+                                                    <div>[[${userProfile.lga}]]</div>
+                                                    <div>[[${userProfile.dosetype}]]</div>
+                                                    <address>
+                                                        [[${userProfile.healthfacility}]]
+                                                        <br>
+                                                    </address>
+
+                                                    <strong th:if="${userProfile.facilitytype == 'private'}">Administative Charge - ₦[[${userProfile.cost}]]</strong>
+                                                    <br/>
+
+
+                                                    <a th:href="${userProfile.paymentref}" th:if="${userProfile.getStateresidence() == 'Lagos State' && userProfile.getPaid()=='unpaid'}"  target="_blank"  class="ml-2">Click here to make payment</a>
+
                                                 </div>
                                             </div>
                                             <div class="col-sm col-lg-6">
@@ -196,12 +218,37 @@
                                                     <dt class="col-4"><strong>Name</strong>
                                                     </dt>
                                                     <dd class="col-8">[[${userProfile.surname}]] [[${userProfile.firstname}]] [[${userProfile.othername}]] </dd>
+
+
+
+
+                                                    <dt th:if="${userProfile.facilitytype == 'private'}" class="col-4"><strong>Status</strong>
+                                                    </dt>
+                                                    <dd th:if="${userProfile.facilitytype == 'private'}" class="col-8"> <div class="badge badge-primary">[[${userProfile.paid}]]</div> </dd>
+
+
+
+
+
+
+
+
                                                 </dl>
                                             </div>
 
 
+
+
+
+
                                         </div>
+
+
+
+
+
                                         <p>Email and SMS have been sent to confirm your booking. </p>
+                                        <p>Please note you would be required to present your preregistered vaccination ID at the facility </p>
                                         <div id="editor"></div>
                                         <a href="/" class="btn btn-sm btn-outline-dark text-center py-1">Back to Registration</a>
 
@@ -244,6 +291,9 @@
 <script type="text/javascript" th:src="@{/assets/js/bootstrap.js}"></script>
 
 
+
+
+
 <!-- Optional Vendor Scripts (Remove the plugin script here and comment initializer script out of index.js if site does not use that feature) -->
 
 <!-- AOS (Animate On Scroll - animates elements into view while scrolling down) -->
@@ -284,15 +334,83 @@
 <script type="text/javascript" th:src="@{/assets/js/typed.min.js}"></script>
 <!-- Required theme scripts (Do not remove) -->
 <script type="text/javascript" th:src="@{/assets/js/theme.js}"></script>
-
-<script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
-
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <!-- Removes page load animation when window is finished loading -->
 <script type="text/javascript">
     window.addEventListener("load",function(){
         document.querySelector('body').classList.add('loaded');
 
     });
+
+
+    $("#clickBtn").on("click", function(e){
+        e.preventDefault();
+        postFormDataAsJson();
+    });
+
+    function payWithPaystack(e) {
+        e.preventDefault();
+        let handler = PaystackPop.setup({
+            key: '42353d5c33b45b0a8246b9bf0cd46820e516e3e4', // Replace with your public key
+            email: 'lekus07@gmail.com',
+            amount: 400 * 100,
+            ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+            // label: "Optional string that replaces customer email"
+            onClose: function(){
+                alert('Window closed.');
+            },
+            callback: function(response){
+                let message = 'Payment complete! Reference: ' + response.reference;
+                alert(message);
+            }
+        });
+        handler.openIframe();
+    }
+
+
+    async function postFormDataAsJson() {
+        var url="https://mobile.lagosvaccine.com";
+
+        const formDataJsonString = '{\n' +
+            '    "method":"INIT_PAYMENT",\n' +
+            '    "api_key":"42353d5c33b45b0a8246b9bf0cd46820e516e3e4",\n' +
+            '    "user":"gov",\n' +
+            '    "booking_ref_id":"test-1",\n' +
+            '    "preferred_vaccination_date":"2021-11-09",\n' +
+            '    "surname":"victor",\n' +
+            '    "firstname":"Moses",\n' +
+            '    "othernames":"Okechukwu",\n' +
+            '    "email":"lekan@gmail.com",\n' +
+            '    "mobile_number":"2347036273607",\n' +
+            '    "package_type":"standard",\n' +
+            '    "facility_id":"34",\n' +
+            '    "facility":"lek",\n' +
+            '    "redirect_url":"https://publicreg.vaccination.gov.ng/",\n' +
+            '    "callback_url":"https://publicreg.vaccination.gov.ng/"\n' +
+            '\n' +
+            '}';
+
+        const fetchOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            body: formDataJsonString,
+        };
+
+        const response = await fetch(url, fetchOptions);
+        console.log(response);
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(errorMessage);
+        }
+
+        return response.json();
+    }
+
+
 
 
 
