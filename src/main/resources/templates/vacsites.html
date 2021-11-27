@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <!-- Begin loading animation -->
+    <!-- Begin loading animation -->
+    <style>
+        @keyframes hideLoader{ 0%{ width: 100%; height: 100%; } 100%{ width: 0; height: 0; } } body > div.loader{ position: fixed; background: white; width: 100%; height: 100%; z-index: 1071; opacity: 0; transition: opacity .5s ease; overflow: hidden; pointer-events: none; display: flex; align-items: center; justify-content: center; } body:not(.loaded) > div.loader{ opacity: 1; } body:not(.loaded){ overflow: hidden; } body.loaded > div.loader{ animation: hideLoader .5s linear .5s forwards; } .loading-animation{width:40px;height:40px;margin:100px auto;background-color:#009B72;border-radius:100%;animation:pulse 1s infinite ease-in-out}@keyframes pulse{0%{-webkit-transform:scale(0);transform:scale(0)}100%{-webkit-transform:scale(1);transform:scale(1);opacity:0}}
+    </style>
+    <script type="text/javascript">
+        window.addEventListener("load",function(){document.querySelector('body').classList.add('loaded');});
+    </script>
+    <!-- End loading animation -->
+    <!-- Begin loading animation -->
+    <link th:href="@{/assets/css/loaders/loader-pulse.css}" rel="stylesheet" type="text/css" media="all" />
+    <!-- End loading animation -->
+    <link th:href="@{/assets/css/theme.css}" rel="stylesheet" type="text/css" media="all" />
+    <link th:href="@{/assets/css/custom.css}" rel="stylesheet" type="text/css" media="all" />
+</head>
+
+<body>
+<div class="navbar-container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a href="/" class="text-center  fade-page mb-3">
+
+                <img th:src="@{/assets/img/logo_nphcda_main.svg}" width="200px" alt="nigeria logo">
+            </a>
+            <div class="d-flex align-items-center order-lg-3">
+                <a href="https://themeforest.net/item/jumpstart-app-and-software-template/24207799" class="btn btn-primary ml-lg-4 mr-3 mr-md-4 mr-lg-0 d-none d-sm-block order-lg-3">Verification Portal</a>
+                <button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+                    <img alt="Navbar Toggler Open Icon" class="navbar-toggler-open icon icon-sm"  th:src="@{/assets/img/icons/interface/icon-menu.svg}">
+                    <img alt="Navbar Toggler Close Icon" class="navbar-toggler-close icon icon-sm"  th:src="@{/assets/img/icons/interface/icon-x.svg}">
+                </button>
+            </div>
+            <div class="collapse navbar-collapse order-3 order-lg-2 justify-content-lg-end" id="navigation-menu">
+                <ul class="navbar-nav my-3 my-lg-0">
+
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">Registration</a>
+                    </li>
+                    <li class="nav-item">
+
+
+                        <div class="dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-link nav-item arrow-bottom" data-toggle="dropdown-grid" href="#" role="button">Corporate Vaccination</a>
+
+                            <div class="row dropdown-menu" style="left: 0px;">
+                                <div class="col-auto" data-dropdown-content="" style="left: 0px;">
+                                    <div class="dropdown-grid-menu">
+                                        <a target="_blank" href="https://forms.gle/grgL1GsRnStJGanc7" class="dropdown-item fade-page">Public Institutions</a>
+                                        <a target="_blank" href="https://forms.gle/grgL1GsRnStJGanc7" class="dropdown-item fade-page">Private Institutions</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!--<li class="nav-item">-->
+
+
+                        <!--<div class="dropdown">-->
+                            <!--<a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-link nav-item arrow-bottom" data-toggle="dropdown-grid" href="#" role="button">Help</a>-->
+
+                            <!--<div class="row dropdown-menu" style="left: 0px;">-->
+                                <!--<div class="col-auto" data-dropdown-content="" style="left: 0px;">-->
+                                    <!--<div class="dropdown-grid-menu">-->
+                                        <!--<a href="/verification-guide" class="dropdown-item fade-page">verification guide</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
+
+
+
+                    <li class="nav-item">
+                        <a href="/vaccination-sites" class="nav-link">Vaccination Sites</a>
+                    </li>
+
+
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<section class="row no-gutters p-0 min-vh-100 bg-primary-3">
+
+    <div class="col-lg-12">
+        <section class="p-0  text-white">
+            <div class="container min-vh-lg-100 d-flex flex-column justify-content-between text-center py-4 py-md-5">
+
+                <div class="row justify-content-center">
+                    <div class="col-xl-10 col-lg-10">
+
+                        <div class="card card-body shadow text-left text-dark">
+
+
+                            <div class="tab-content flex-grow-1 mt-3 mt-md-4" id="myTabContent-4">
+                                <div class="tab-pane fade active show" id="home-4" role="tabpanel" aria-labelledby="home-tab-4">
+
+                                    <div class="card-body">
+                                        <form data-form-email novalidate   th:action="@{/registration}" th:object="${userprofile}" data-success-redirect="/confirmation" method="post"  >
+
+
+
+                                            <div class="form-row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <h5>Health Facility type</h5>
+
+                                                        <div class="d-flex flex-wrap">
+                                                            <div class="custom-control custom-radio mr-4">
+                                                                <input type="radio" id="radio-12" name="facilitytype" class="custom-control-input"  th:value="public" checked="">
+                                                                <label class=" h5 custom-control-label" for="radio-12">Public</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio mr-4">
+                                                                <input type="radio" id="radio-11" name="facilitytype" class="custom-control-input"  th:value="private" >
+                                                                <label class=" h5 custom-control-label" for="radio-11">Private</label>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <br/>
+
+
+
+
+
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <h5 >Preferred State </h5>
+                                                        <div class="position-relative">
+                                                            <select id="stateofres" th:field="*{stateresidence}" class="custom-select" required="true">
+
+                                                                <option selected value="" th:text="#{message.selectoption}"></option>
+
+                                                            </select>
+                                                            <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
+                                                            <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <h5>Preferred LGA </h5>
+                                                        <div class="position-relative">
+                                                            <select id="lgaselect" class="custom-select" th:field="*{lga}" required="true">
+
+                                                                <option selected value="" th:text="#{message.selectoption}"> </option>
+
+                                                            </select>
+                                                            <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
+                                                            <div class="invalid-feedback" th:text="#{message.error}">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br/>
+                                            <div class="form-row">
+
+
+
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+
+
+                                                        <div id="bullets">
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+
+
+
+
+
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+
+
+
+
+
+<a href="#top" class="btn btn-primary rounded-circle btn-back-to-top" data-smooth-scroll data-aos="fade-up" data-aos-offset="2000" data-aos-mirror="true" data-aos-once="false">
+    <img th:src="@{/assets/img/icons/interface/icon-arrow-up.svg}" alt="Icon" class="icon bg-white" data-inject-svg>
+</a>
+<!-- Required vendor scripts (Do not remove) -->
+<script type="text/javascript" th:src="@{/assets/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/assets/js/bootstrap.js}"></script>
+
+<!-- Optional Vendor Scripts (Remove the plugin script here and comment initializer script out of index.js if site does not use that feature) -->
+
+<!-- AOS (Animate On Scroll - animates elements into view while scrolling down) -->
+<script type="text/javascript" th:src="@{/assets/js/aos.js}"></script>
+<!-- Clipboard (copies content from browser into OS clipboard) -->
+<script type="text/javascript" th:src="@{/assets/js/clipboard.min.js}"></script>
+<!-- Flatpickr (calendar/date/time picker UI) -->
+<script type="text/javascript" th:src="@{/assets/js/flatpickr.min.js}"></script>
+<!-- Flickity (handles touch enabled carousels and sliders) -->
+<script type="text/javascript" src="assets/js/flickity.pkgd.min.js"></script>
+<!-- Ion rangeSlider (flexible and pretty range slider elements) -->
+<script type="text/javascript" th:src="@{/assets/js/ion.rangeSlider.min.js}"></script>
+<!-- jQuery Countdown (displays countdown text to a specified date) -->
+<script type="text/javascript" th:src="@{/assets/js/jquery.countdown.min.js}"></script>
+<!-- ScrollMonitor (manages events for elements scrolling in and out of view) -->
+<script type="text/javascript" th:src="@{/assets/js/scrollMonitor.js}"></script>
+<!-- Smooth scroll (animation to links in-page)-->
+<script type="text/javascript" th:src="@{/assets/js/smooth-scroll.polyfills.min.js}"></script>
+<!-- SVGIn\jector (replaces img tags with SVG code to allow easy inclusion of SVGs with the benefit of inheriting colors and styles)-->
+<script type="text/javascript" th:src="@{/assets/js/svg-injector.umd.production.js}"></script>
+<!-- TwitterFetcher (displays a feed of tweets from a specified account)-->
+<!-- Required theme scripts (Do not remove) -->
+<script type="text/javascript" th:src="@{/assets/js/theme.js}"></script>
+<!-- This script appears only on the demo.  It is used to delay unnecessary image loading until after the main page content is loaded. -->
+
+<!-- Removes page load animation when window is finished loading -->
+<script type="text/javascript">
+    window.addEventListener("load",function(){
+        document.querySelector('body').classList.add('loaded');
+        $('#advertnotice').modal('show');
+        function rmydays(date) {
+            return (date.getDay() === 0 || date.getDay() === 6);
+        }
+
+        var dateToday = new Date();
+        flatpickr('#dob', {
+            maxDate:"2003-12-31",
+            minDate:"1919-12-31"
+        });
+
+        flatpickr('#prefdate', {
+            minDate:"today",
+            maxDate:"2021-11-17",
+            disable: [rmydays]
+        });
+
+        showstatelist();
+
+    });
+</script>
+
+<script>
+
+
+
+    const stateselect= document.getElementById("stateofres")
+
+    const lgaselect= document.getElementById("lgaselect");
+    const facilityselect= document.getElementById("facility");
+
+
+    const publicfac= document.getElementById("radio-12");
+    const privatefac= document.getElementById("radio-11");
+
+
+
+
+
+
+
+
+
+    stateselect.addEventListener("change", populateLGA);
+    lgaselect.addEventListener("change", populateFacility)
+
+  
+    publicfac.addEventListener("change", showstatelist);
+    privatefac.addEventListener("change", showstatelist);
+
+
+
+
+
+    async function showstatelist(event) {
+
+        if(publicfac.checked){
+
+            console.log("show-list");
+            populateState();
+        }else if(privatefac.checked) {
+
+            console.log("show-sgte");
+            populateState();
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+    async function populateState(event) {
+        var facilitytype =  document.querySelector('input[name="facilitytype"]:checked').value;
+
+
+        console.log("trying to get facilities");
+        console.log(facilitytype)
+
+        $.ajax({
+            type: 'GET',
+            url: "/getState?facilitytype=" + facilitytype,
+            success: function(data){
+                var slctSubcat=$('#stateofres'), option="";
+                slctSubcat.empty();
+                console.log(data);
+                console.log("checking facility "+data)
+
+
+                for(var i=0; i<data.length; i++){
+                    option = option + "<option value='"+data[i] + "'>"+data[i] + "</option>";
+                }
+                slctSubcat.append(option);
+
+
+                populateLGA();
+            },
+            error:function(){
+                alert("error");
+            }
+
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    async function populateLGA(event) {
+
+        function rmydays(date) {
+            return (date.getDay() === 0 || date.getDay() === 6);
+        }
+
+        var facilitytype =  document.querySelector('input[name="facilitytype"]:checked').value;
+
+        var stateid = document.getElementById("stateofres").value;
+        console.log(stateid);
+
+        if(stateid=="Lagos State"){
+            console.log("Lagos Na Waa oo");
+            flatpickr('#prefdate', {
+                minDate:"today",
+                maxDate:"2021-12-17",
+                disable: [rmydays,"2021-09-20", "2021-09-21" ]
+            });
+        }else{
+            flatpickr('#prefdate', {
+                minDate:"today",
+                maxDate:"2021-12-17",
+                disable: [rmydays]
+            });
+        }
+
+        var slctSubcat=$('#lgaselect'), option="";
+        var slctSubcat2=$('#facility'), option="";
+        $.ajax({
+            type: 'GET',
+            url: "/getlga/" + stateid +"/"+facilitytype,
+            success: function(data){
+
+                slctSubcat.empty();
+                console.log(data)
+
+                for(var i=0; i<data.length; i++){
+                    option = option + "<option value='"+data[i].lga + "'>"+data[i].lga+ "</option>";
+                }
+                slctSubcat.append(option);
+
+                populateFacility();
+            },
+            error:function(){
+                option="<option value=''>Select Option</option>";
+                console.log("empty")
+                slctSubcat.empty();
+                slctSubcat.append(option);
+                slctSubcat2.empty();
+                slctSubcat2.append(option);
+
+            }
+
+        });
+
+    }
+
+
+
+
+    async function populateFacility(event) {
+        var facilitytype =  document.querySelector('input[name="facilitytype"]:checked').value;
+        var lgaid = document.getElementById("lgaselect").value;
+
+
+        $.ajax({
+            type: 'GET',
+            url: "/getfacility?lgaid=" + lgaid +"&facilitytype="+facilitytype,
+            success: function(data){
+                var slctSubcat=$('#facility'), option="";
+                slctSubcat.empty();
+                var ul = document.getElementById("bullets");
+
+                var header = document.createElement("h6");
+
+                header.textContent="vaccination sites";
+
+                ul.append(header);
+                ul.innerHTML = '';
+
+                for(var i=0; i<data.length; i++){
+
+                    var topping = data[i].healthCenter;
+
+                    var listItem = document.createElement("blockquote");
+                    listItem.classList.add("blockquote");
+                    listItem.textContent = topping;
+
+                    ul.append(listItem);
+
+                }
+
+            },
+            error:function(){
+                console.log("empty")
+                slctSubcat.empty();
+                slctSubcat.append(option);
+            }
+
+        });
+    }
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
