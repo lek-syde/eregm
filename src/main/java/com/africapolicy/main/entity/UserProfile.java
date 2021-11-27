@@ -46,19 +46,6 @@ public class UserProfile {
     String orgid;
     String knowdob="false";
 
-    String facilitytype;
-    String dosetype;
-
-    double cost;
-    String paid;
-
-    String paymentref;
-
-    String transid;
-    String paymentid;
-
-
-
     public String getKnowdob() {
         return knowdob;
     }

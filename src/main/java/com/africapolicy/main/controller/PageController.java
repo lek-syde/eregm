@@ -1,19 +1,16 @@
 package com.africapolicy.main.controller;
 
-import com.africapolicy.main.DTO.*;
+import com.africapolicy.main.DTO.Attribute;
+import com.africapolicy.main.DTO.Enrollment;
+import com.africapolicy.main.DTO.TrackedEntityInstance;
 import com.africapolicy.main.config.CodeConfig;
 import com.africapolicy.main.entity.*;
-import com.africapolicy.main.entity.VerificationEntity;
 import com.africapolicy.main.repo.*;
 import com.africapolicy.main.response.StatusMessage;
 import com.africapolicy.main.email.ScheduleEmailRequest;
 import com.africapolicy.main.service.EmailService;
 import com.africapolicy.main.service.RoomReservationService;
 import com.africapolicy.main.service.SmsService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.google.gson.Gson;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
@@ -22,23 +19,29 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
-import net.minidev.json.JSONObject;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.http.client.reactive.ClientHttpConnector;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import reactor.netty.http.client.HttpClient;
+import reactor.netty.resources.ConnectionProvider;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -47,6 +50,8 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.UnknownHostException;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -64,14 +69,6 @@ public class PageController {
 
     @Value("${dhis-url}")
     private String dhisurl;
-
-
-    @Value("${lagos-payment-url}")
-    private String lagosurl;
-
-
-    @Value("${lagos-payment-api}")
-    private String lagospaymentapi;
 
     @Value("${dhis-username}")
     private String dhisusernam;
@@ -121,29 +118,6 @@ public class PageController {
 
 
 
-    @RequestMapping(value = "/verification-guide", method = RequestMethod.GET)
-    public String gotoguide(Model model) {
-        System.out.println("show guide");
-        return "guide";
-    }
-
-
-
-
-    @RequestMapping(value = "/paymentconfirmation", method = RequestMethod.GET)
-    public String gotoguide(Model model, @RequestParam(name = "id", required = true) String vacid, @RequestParam(name = "tid", required = true) String tid ) {
-        System.out.println("show guide");
-
-        UserProfile userp= userProfileRepo.findByPaymentid(vacid);
-
-        userp.setTransid(tid);
-        userp.setPaid("Paid");
-
-        model.addAttribute("userProfile", userp);
-        return "result";
-
-    }
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homePage(Model model) {
 
@@ -167,12 +141,10 @@ public class PageController {
 //        newUser.setActive(1);
 //        userRepo.save(newUser);
 
-        List<String> stateList= healthCenterRepo.findDistinctAll("public");
+        List<String> stateList= healthCenterRepo.findDistinctAll();
 
 
         System.out.println(stateList.toString());
-
-
 
         model.addAttribute("states", stateList);
 
@@ -245,7 +217,6 @@ public class PageController {
     public String confirmationPage(Model model, HttpSession session, @RequestParam(name = "vackey", required = true) String vackey){
 
        UserProfile userp= userProfileRepo.findByVac(vackey);
-
        model.addAttribute("userProfile", userp);
         return "result";
     }
@@ -253,14 +224,8 @@ public class PageController {
 
     String errorMessage;
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ResponseEntity<StatusMessage> createNewUser(@Valid UserProfile user, BindingResult bindingResult, Model model, HttpServletRequest request, HttpSession session) throws ParseException, URISyntaxException, JsonProcessingException {
+    public ResponseEntity<StatusMessage> createNewUser(@Valid UserProfile user, BindingResult bindingResult, Model model, HttpServletRequest request, HttpSession session) throws ParseException, URISyntaxException {
 
-         if(user.getGender().equalsIgnoreCase("female") && user.getPregnant().equalsIgnoreCase("true")){
-
-            System.out.println("error");
-            errorMessage="Pregnant women are not eligible for vaccination at this time. ";
-            return  ResponseEntity.status(500).body(new StatusMessage("error",errorMessage ));
-          }
 
 
 
@@ -288,73 +253,21 @@ public class PageController {
 
             userProfile.setDate(user.getDate());
             userProfile.setSession(user.getSession());
-            userProfile.setFacilitytype(user.getFacilitytype());
 
             String vackey= generator();
 
             userProfile.setVac(vackey);
-            if(user.getDosetype()=="first"){
-
-            }else{
-                userProfile.setCost(hc.getFulldose());
-            }
-
-
-            if(user.getFacilitytype()=="public"){
-                userProfile.setPaid("paid");
-            }else{
-
-                userProfile.setPaid("unpaid");
-            }
 
 
 
 
 
-            String packae;
-
-
-
-
-            if(user.getDosetype().equalsIgnoreCase("first")){
-                userProfile.setCost(hc.getFulldose());
-                packae="Premium";
-                System.out.println("first dose");
-                System.out.println(user.getFacilitytype());
-            }else{
-                packae="Standard";
-                userProfile.setCost(hc.getOnedose());
-                System.out.println(user.getFacilitytype());
-                System.out.println("second dose");
-            }
-
-
-
-
-
-
-
-
-
-           String shortId = RandomStringUtils.randomAlphabetic(5);
-
-            userProfile.setPaymentid(shortId);
-
-
-
-
-            if(user.getStateresidence().equalsIgnoreCase("Lagos State")){
-                LagosPaymentResponse re= updatePayment(userProfile,packae);
-
-                System.out.println("Initialising");
-                System.out.println(re.toString());
-                userProfile.setPaymentref(re.getPayment_url());
-
-
-            }
             userProfileRepo.save(userProfile);
 
+
+
             updateToDHIS(userProfile);
+
 
 
 
@@ -383,7 +296,7 @@ public class PageController {
             Email to = new Email(userProfile.getEmail());
             String timeing;
 
-            if(myRoom.getTimeslot().equalsIgnoreCase("Morning")){
+            if(myRoom.getTimeslot()=="Morning"){
 
                 timeing="(8:00am -12:00pm)";
             }else{
@@ -429,66 +342,6 @@ public class PageController {
 
 
 
-
-    }
-
-    private LagosPaymentResponse updatePayment(UserProfile userProfile, String packag) throws URISyntaxException, JsonProcessingException {
-
-        System.out.println("upload payment");
-
-
-        System.out.println("package"+packag);
-        LagosPayment lp= new LagosPayment();
-
-        lp.setMethod("INIT_PAYMENT");
-        lp.setApi_key(lagospaymentapi);
-        lp.setUser("gov");
-        lp.setBooking_ref_id(userProfile.getPaymentid());
-        lp.setPreferred_vaccination_date(userProfile.getDate());
-        lp.setSurname(userProfile.getSurname());
-        lp.setOthernames(userProfile.getOthername());
-        lp.setFirstname(userProfile.getFirstname());
-        lp.setEmail(userProfile.getEmail());
-        lp.setMobile_Number(userProfile.getPhone());
-        lp.setPackage_type(packag);
-        lp.setFacility_id(Long.toString(userProfile.getFacilityid()));
-        lp.setFacility(userProfile.getHealthfacility());
-        lp.setRedirect_url("https://vaccination.gov.ng/paymentconfirmation");
-        lp.setCallback_url("https://vaccination.gov.ng/paymentconfirmation");
-
-
-
-
-
-        RestTemplate restTemplate = restTemplateBuilder.build();
-        URI uri = new URI(lagosurl);
-
-
-
-
-
-        ResponseEntity<String> result = restTemplate.postForEntity(uri, lp, String.class);
-
-
-
-        LagosPaymentResponse data = new Gson().fromJson(result.getBody(), LagosPaymentResponse.class);
-
-
-                System.out.println(result.getBody());
-
-        Gson g = new Gson();
-        LagosPaymentResponse p = g.fromJson(result.getBody(), LagosPaymentResponse.class);
-
-        System.out.println(p.toString());
-
-
-        System.out.println(p.toString());
-
-
-
-
-
-        return p;
 
     }
 
@@ -599,9 +452,9 @@ public class PageController {
         }
 
         if(user.getGender().equalsIgnoreCase("female") && user.getPregnant().equalsIgnoreCase("false") ){
-            preg.setValue("notpreg");
-        }else{
             preg.setValue("preg");
+        }else{
+            preg.setValue("notpreg");
         }
 
 
@@ -646,6 +499,7 @@ public class PageController {
 
             RestTemplate restTemplate = restTemplateBuilder.basicAuthentication(dhisusernam,dhispassword).build();
             URI uri = new URI(url2);
+
 
 
         Gson gson = new Gson();

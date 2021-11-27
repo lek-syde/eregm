@@ -17,56 +17,63 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "payment_url"
 })
 @Generated("jsonschema2pojo")
-public class LagosPaymentResponse {
+public class LagosPayment {
 
     @JsonProperty("resp_code")
-    public String resp_Code;
+    public String respCode;
     @JsonProperty("resp_msg")
-    public String resp_Msg;
+    public String respMsg;
     @JsonProperty("booking_ref_id")
-    public String booking_ref_id;
+    public String bookingRefId;
     @JsonProperty("payment_url")
-    public String payment_url;
+    public String paymentUrl;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public String getResp_Code() {
-        return resp_Code;
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
     }
 
-    public void setResp_Code(String resp_Code) {
-        this.resp_Code = resp_Code;
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
-    public String getResp_Msg() {
-        return resp_Msg;
+
+    public String getRespCode() {
+        return respCode;
     }
 
-    public void setResp_Msg(String resp_Msg) {
-        this.resp_Msg = resp_Msg;
+    public void setRespCode(String respCode) {
+        this.respCode = respCode;
     }
 
-    public String getBooking_ref_id() {
-        return booking_ref_id;
+    public String getRespMsg() {
+        return respMsg;
     }
 
-    public void setBooking_ref_id(String booking_ref_id) {
-        this.booking_ref_id = booking_ref_id;
+    public void setRespMsg(String respMsg) {
+        this.respMsg = respMsg;
     }
 
-    public String getPayment_url() {
-        return payment_url;
+    public String getBookingRefId() {
+        return bookingRefId;
     }
 
-    public void setPayment_url(String payment_url) {
-        this.payment_url = payment_url;
+    public void setBookingRefId(String bookingRefId) {
+        this.bookingRefId = bookingRefId;
     }
 
-    @Override
-    public String toString() {
-        return "LagosPaymentResponse{" +
-                "resp_Code='" + resp_Code + '\'' +
-                ", resp_Msg='" + resp_Msg + '\'' +
-                ", booking_ref_id='" + booking_ref_id + '\'' +
-                ", payment_url='" + payment_url + '\'' +
-                '}';
+    public String getPaymentUrl() {
+        return paymentUrl;
+    }
+
+    public void setPaymentUrl(String paymentUrl) {
+        this.paymentUrl = paymentUrl;
+    }
+
+    public void setAdditionalProperties(Map<String, Object> additionalProperties) {
+        this.additionalProperties = additionalProperties;
     }
 }

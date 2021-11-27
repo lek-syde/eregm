@@ -16,24 +16,18 @@ public interface HealthCenterRepo extends JpaRepository<Healthcenter,Integer > {
 
     List<Healthcenter> findByStateAndLga(String stateid, String lgaid);
 
-    List<Healthcenter> findByLgaAndFacilitytype(String lga, String facilitytype);
-
     @Query(value="SELECT * FROM healthcenter u WHERE u.lga = ?1",
             nativeQuery = true)
     List<Healthcenter> findByLga(String lgaid);
 
 
 
-    @Query(value="SELECT * FROM healthcenter u WHERE u.state = ?1 and u.facilitytype = ?2 group by u.lga order by u.lga asc",
+
+    List<Healthcenter> findDistinctByState(String stateid);
+
+    @Query(value="SELECT distinct state FROM healthcenter ORDER BY state asc ",
             nativeQuery = true)
-    List<Healthcenter> findDistinctByStateAndFacilitytype(String stateid, String facilitytype);
-
-    @Query(value="SELECT distinct state FROM healthcenter u where u.facilitytype= ?1 ORDER BY u.state asc ",
-            nativeQuery = true)
-    List<String> findDistinctAll(String facilitytype);
-
-
-
+    List<String> findDistinctAll();
 
 
     //List<Healthcenter> findByWardId(int wardid);

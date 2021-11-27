@@ -22,13 +22,5 @@ public class Healthcenter {
     String healthCenter;
     String active;
     String organizationuit;
-    String facilitytype;
-    double onedose;
-    double fulldose;
-
-
-
-
-
 
 }
