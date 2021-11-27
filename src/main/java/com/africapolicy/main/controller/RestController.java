@@ -31,25 +31,39 @@ public class RestController {
 
 
 
-
-    @GetMapping(value = "/getlga/{id}")
-    public List<Healthcenter> getwards(@PathVariable("id") String stateid) {
+@CrossOrigin(maxAge = 3600)
+    @GetMapping(value = "/getlga/{id}/{facility}")
+    public List<Healthcenter> getwards(@PathVariable("id") String stateid, @PathVariable("facility") String facilitytype) {
         System.out.println("stateid"+ stateid);
 
 
+    System.out.println("getting lga");
+        List<Healthcenter> ls= healthCenterRepo.findDistinctByStateAndFacilitytype(stateid, facilitytype);
 
-        return healthCenterRepo.findDistinctByState(stateid);
-
+    System.out.println(ls.toString());
+        return ls;
     }
 
 
 
-
+@CrossOrigin(maxAge = 3600)
     @GetMapping(value = "/states")
     public List<Healthcenter> getstates() {
         return healthCenterRepo.findAll();
 
     }
+
+
+    @CrossOrigin(maxAge = 3600)
+    @GetMapping(value = "/getState")
+    public List<String> getstates(@RequestParam(name = "facilitytype", required = true) String factype) {
+
+
+
+        return healthCenterRepo.findDistinctAll(factype);
+
+    }
+
 
 
 
@@ -96,22 +110,34 @@ public class RestController {
 
     }
 
-
+@CrossOrigin(maxAge = 3600)
     @GetMapping(value = "/getfacility")
     public List<Healthcenter> getfacility(
             @RequestParam(name = "lgaid", required = false) String lgaid,
-            @RequestParam(name = "wardid", required = false) Integer wardid,
+            @RequestParam(name = "facilitytype", required = false) String facilitytype,
             @RequestParam(name = "stateid", required = false) String stateid) {
 
-        System.out.println("here");
-        if (stateid != null && lgaid == null && wardid == null) {
+        System.out.println("what facilities?");
+    System.out.println("lga"+ lgaid);
+    System.out.println("facilitytype"+ facilitytype);
+    System.out.println("stateid"+ stateid);
+        if (stateid != null && lgaid == null && facilitytype != null) {
             System.out.println("here1");
-            return healthCenterRepo.findDistinctByState(stateid);
-        } else if (stateid != null && lgaid != null) {
+            System.out.println("lga"+ lgaid);
+            System.out.println("facilitytype"+ facilitytype);
+            System.out.println("stateid"+ stateid);
+            return healthCenterRepo.findDistinctByStateAndFacilitytype(stateid, facilitytype);
+        } else if (facilitytype != null && lgaid != null ) {
             System.out.println("here2");
-            return healthCenterRepo.findByStateAndLga(stateid, lgaid);
-        } else if (stateid != null && lgaid != null && wardid != null) {
+            System.out.println("lga"+ lgaid);
+            System.out.println("facilitytype"+ facilitytype);
+            System.out.println("stateid"+ stateid);
+            return healthCenterRepo.findByLgaAndFacilitytype(lgaid, facilitytype);
+        } else if (stateid != null && lgaid != null && facilitytype != null) {
             System.out.println("here3");
+            System.out.println("lga"+ lgaid);
+            System.out.println("facilitytype"+ facilitytype);
+            System.out.println("stateid"+ stateid);
           //  return healthCenterRepo.findByStateAndLgaAndWard(stateid, lgaid, wardid);
         }
 
