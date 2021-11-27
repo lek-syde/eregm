@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <!-- Begin loading animation -->
+    <link th:href="@{/assets/css/loaders/loader-pulse.css}" rel="stylesheet" type="text/css" media="all" />
+    <!-- End loading animation -->
+    <link th:href="@{/assets/css/theme.css}" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,600,700&display=swap" rel="stylesheet">
+     <meta name="image" property="og:image" content="">
+    <meta name="author" content="">
+
+  </head>
+
+  <body>
+   
+      
+
+    <div data-overlay class="min-vh-100 bg-light d-flex flex-column justify-content-md-center">
+      <section class="py-3">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-xl-4 col-lg-5 col-md-6">
+              <div class="card card-body shadow">
+                <h1 class="h5 text-center">Sign In</h1>
+                <form th:action="@{/login}"  method="POST" >
+                  <div class="form-group">
+                    <input type="email" class="form-control" name="email" placeholder="Email Address" required/>
+                  </div>
+                  <div class="form-group">
+                    <input type="password" class="form-control"  name="password"  placeholder="Password" required/>
+                    <div class="text-right text-small mt-2">
+                      <a href="/reset-password">Forgot Password?</a>
+                    </div>
+                  </div>
+                 
+                  
+                  <div align="center" th:if="${param.error}">
+				<p style="font-size: 20; color: #FF1C19;">Email/ Password invalid or Account not activated, please verify in your mail</p>
+			</div>
+			   <input type="hidden" name="${_csrf.parameterName}"
+				  value="${_csrf.token}" />
+                  <button class="btn btn-primary btn-block" name="Submit" type="submit">Sign In</button>
+                </form>
+              </div>
+              <div class="text-center text-small mt-3">
+                Don't have an account? <a href="/signup">Sign up here</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center">
+          <div class="modal-header border-0 pb-0">
+            <div class="w-100 pt-4">
+              <div class="d-inline-block mb-4 p-3 p-md-4 rounded-circle bg-primary-alt">
+                <img th:src="@{/assets/img/icons/theme/communication/readed-mail.svg}" alt="Confirmation Icon" class="icon bg-primary" data-inject-svg="data-inject-svg">
+              </div>
+            </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">
+                <img th:src="@{/assets/img/icons/interface/icon-x.svg}" alt="Icon">
+              </span>
+            </button>
+          </div>
+          <div class="modal-body px-md-4 px-lg-5 pb-4 pb-lg-5">
+            <h5 class="h3">Check your inbox</h5>
+            <div>We have just sent further instructions to your email for activating your account 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="verification-modal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center">
+          <div class="modal-header border-0 pb-0">
+            <div class="w-100 pt-4">
+              <div class="d-inline-block mb-4 p-3 p-md-4 rounded-circle bg-primary-alt">
+                <img th:src="@{/assets/img/icons/theme/communication/readed-mail.svg}" alt="Confirmation Icon" class="icon bg-primary" data-inject-svg="data-inject-svg">
+              </div>
+            </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">
+                <img th:src="@{/assets/img/icons/interface/icon-x.svg}" alt="Icon">
+              </span>
+            </button>
+          </div>
+          <div class="modal-body px-md-4 px-lg-5 pb-4 pb-lg-5">
+            <h5 class="h3">Account Verification Successful</h5>
+            <div>We have activated your account to <strong> you can log in now</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#top" class="btn btn-primary rounded-circle btn-back-to-top" data-smooth-scroll data-aos="fade-up" data-aos-offset="2000" data-aos-mirror="true" data-aos-once="false">
+      <img th:src="@{/assets/img/icons/interface/icon-arrow-up.svg}" alt="Icon" class="icon bg-white" data-inject-svg>
+    </a>
+ <!-- Required vendor scripts (Do not remove) -->
+    <script type="text/javascript" th:src="@{/assets/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/popper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/bootstrap.js}"></script>
+
+    <!-- Optional Vendor Scripts (Remove the plugin script here and comment initializer script out of index.js if site does not use that feature) -->
+
+    <!-- AOS (Animate On Scroll - animates elements into view while scrolling down) -->
+    <script type="text/javascript" th:src="@{/assets/js/aos.js}"></script>
+    <!-- Clipboard (copies content from browser into OS clipboard) -->
+    <script type="text/javascript" th:src="@{/assets/js/clipboard.min.js}"></script>
+    <!-- Fancybox (handles image and video lightbox and galleries) -->
+    <script type="text/javascript" th:src="@{/assets/js/jquery.fancybox.min.js}"></script>
+    <!-- Flatpickr (calendar/date/time picker UI) -->
+    <script type="text/javascript" th:src="@{/assets/js/flatpickr.min.js}"></script>
+    <!-- Flickity (handles touch enabled carousels and sliders) -->
+    <script type="text/javascript" th:src="@{/assets/js/flickity.pkgd.min.js}"></script>
+    <!-- Ion rangeSlider (flexible and pretty range slider elements) -->
+    <script type="text/javascript" th:src="@{/assets/js/ion.rangeSlider.min.js}"></script>
+    <!-- Isotope (masonry layouts and filtering) -->
+    <script type="text/javascript" th:src="@{/assets/js/isotope.pkgd.min.js}"></script>
+    <!-- jarallax (parallax effect and video backgrounds) -->
+    <script type="text/javascript" th:src="@{/assets/js/jarallax.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/jarallax-video.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/jarallax-element.min.js}"></script>
+    <!-- jQuery Countdown (displays countdown text to a specified date) -->
+    <script type="text/javascript" th:src="@{/assets/js/jquery.countdown.min.js}"></script>
+    <!-- jQuery smartWizard facilitates steppable wizard content -->
+    <script type="text/javascript" th:src="@{/assets/js/jquery.smartWizard.min.js}"></script>
+    <!-- Plyr (unified player for Video, Audio, Vimeo and Youtube) -->
+    <script type="text/javascript" th:src="@{/assets/js/plyr.polyfilled.min.js}"></script>
+    <!-- Prism (displays formatted code boxes) -->
+    <script type="text/javascript" th:src="@{/assets/js/prism.js}"></script>
+    <!-- ScrollMonitor (manages events for elements scrolling in and out of view) -->
+    <script type="text/javascript" th:src="@{/assets/js/scrollMonitor.js}"></script>
+    <!-- Smooth scroll (animation to links in-page)-->
+    <script type="text/javascript" th:src="@{/assets/js/smooth-scroll.polyfills.min.js}"></script>
+    <!-- SVGInjector (replaces img tags with SVG code to allow easy inclusion of SVGs with the benefit of inheriting colors and styles)-->
+    <script type="text/javascript" th:src="@{/assets/js/svg-injector.umd.production.js}"></script>
+    <!-- TwitterFetcher (displays a feed of tweets from a specified account)-->
+    <script type="text/javascript" th:src="@{/assets/js/twitterFetcher_min.js}"></script>
+    <!-- Typed text (animated typing effect)-->
+    <script type="text/javascript" th:src="@{/assets/js/typed.min.js}"></script>
+    <!-- Required theme scripts (Do not remove) -->
+    <script type="text/javascript" th:src="@{/assets/js/theme.js}"></script>
+      
+    <!-- Removes page load animation when window is finished loading -->
+    <script type="text/javascript" th:inline="javascript">
+      window.addEventListener("load",function(){
+    	  
+    	  /*<![CDATA[*/
+  		var switchs = /*[[${switch}]]*/ hide;
+  		var message= /*[[${message}]]*/;
+  		var dialog= /*[[${dialog}]]*/;
+  	
+  		/*]]>*/
+    	  
+    	  
+    	  
+    	  
+    	  document.querySelector('body').classList.add('loaded');
+    	   $('#'+dialog).modal(switchs);
+      
+      });
+      
+    
+    </script>
+
+  </body>
+
+</html>
